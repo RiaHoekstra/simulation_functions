@@ -1,4 +1,4 @@
-genIsing <- function(nNode, propPositive = 0.5, rewire = 0, inclusion = NULL, mean = 0.3, sd = 0.1, ...){
+genIsing <- function(nNode, rewire = 0, inclusion = NULL, mean = 0.3, sd = 0.1, ...){
   
   if (is.null(inclusion)){
     
@@ -7,7 +7,7 @@ genIsing <- function(nNode, propPositive = 0.5, rewire = 0, inclusion = NULL, me
     }
     
     # Generate graph structure:
-    graph <- ifelse(bootnet::genGGM(nNode, propPositive = propPositive, p = rewire, ...) != 0, 1, 0) 
+    graph <- ifelse(bootnet::genGGM(nNode, p = rewire, ...) != 0, 1, 0) 
   
   } else {
 
@@ -32,4 +32,13 @@ genIsing <- function(nNode, propPositive = 0.5, rewire = 0, inclusion = NULL, me
   
   return(graph)
 }
+
+
+
+
+
+
+
+
+
 
