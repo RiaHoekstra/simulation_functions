@@ -1,12 +1,12 @@
-GGMsim <- function(n, PCC, missing = 0){
+GGMsim <- function(n, omega, missing = 0){
   
   # check if matrix is positive semi-definite
-  if (any(eigen(diag(ncol(PCC)) - PCC)$values < 0)){
+  if (any(eigen(diag(ncol(omega)) - omega)$values < 0)){
     stop("matrix is not positive semi-definite") 
   }
   
   # Get covariance matrix sigma: 
-  sigma <- cov2cor(solve(diag(ncol(PCC)) - PCC))  
+  sigma <- cov2cor(solve(diag(ncol(omega)) - omega))  
   
   # Generate data:
   data <- mvtnorm::rmvnorm(n, sigma = sigma)
@@ -20,4 +20,3 @@ GGMsim <- function(n, PCC, missing = 0){
   
   return(data)
 }
-
