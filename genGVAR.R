@@ -1,4 +1,4 @@
-genGVAR <- function(nNode, propPositiveCon = 0.5, propPositiveTemp = 0.5, mean = 0.3, sd = 0.1, ...){
+genGVAR <- function(nNode, propPositiveCon = 0.8, mean = 0.3, sd = 0.1, ...){
   
   # Generate contemporaneous network using GGM:
   omega <- bootnet::genGGM(nNode, propPositive = propPositiveCon, ...) # partial correlation matrix
@@ -15,7 +15,7 @@ genGVAR <- function(nNode, propPositiveCon = 0.5, propPositiveTemp = 0.5, mean =
   beta <- diag(1, nNode) 
   
   for (i in 1:nNode){
-    beta[(i+(1-1)) %% nNode+1, i] <- sample(c(-1, 1), 1, propPositiveTemp)
+    beta[(i+(1-1)) %% nNode+1, i] <- sample(c(-1, 1), 1, 0.5)
   }
   
   beta <- beta * rnorm(nNode^2, mean, sd)
