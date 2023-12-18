@@ -134,7 +134,7 @@ evalNet <- function(true, est, metric = NULL, directed = FALSE){
   
   # correlation between absolute edges:
   if("correlation_abs" %in% metric){
-  out$abs_correlation <- cor(abs(est),abs(true))
+  out$abs_correlation <- cor(abs(est), abs(true))
   }
   
   # correlation between true edge weights:
@@ -177,7 +177,7 @@ evalNet <- function(true, est, metric = NULL, directed = FALSE){
   # Kendall correlations:
   if("centrality_Kendall_cor" %in% metric){
     if(directed){
-      out$in_strength_correlation_kendall <- cor(centTrue$Indegree, centEst$Indegree, method = "kendall")
+      out$in_strength_correlation_kendall <- cor(centTrue$InDegree, centEst$InDegree, method = "kendall")
       out$out_strength_correlation_kendall <- cor(centTrue$OutDegree, centEst$OutDegree, method = "kendall")
     } else{
       out$strength_correlation_kendall <- cor(centTrue$OutDegree, centEst$OutDegree, method = "kendall")
