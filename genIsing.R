@@ -1,4 +1,4 @@
-genIsing <- function(nNode, propPositive = 0.5, rewire = 0, inclusion = NULL, mean = 0.25, sd = 0.1, ...){
+genIsing <- function(nNode, propPositive = 0.5, rewire = 0, inclusion = NULL, mean = 0.3, sd = 0.1, ...){
   
   if (is.null(inclusion)){
     
