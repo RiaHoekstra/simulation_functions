@@ -8,7 +8,7 @@ evalNet <- function(true, est, metric = NULL, directed = FALSE){
                 "sensitivity_top25", "sensitivity_top10", "specificity", 
                 "precision", "precision_top50", "precision_top25", 
                 "precision_top10", "jaccard_index", "correlation", 
-                "correlation_abs", "correlation_true", "bias", "bias_true", 
+                "correlation_abs", "correlation_true", "bias_abs", "bias", "bias_true", 
                 "centrality_Pearson_cor", "centrality_Kendall_cor", 
                 "centrality_top5", "centrality_top3", "centrality_top1")
   } else if(any(!(metric %in% c("sensitivity", "signed_sensitivity", "sensitivity_top50",
@@ -16,13 +16,13 @@ evalNet <- function(true, est, metric = NULL, directed = FALSE){
                                 "precision", "precision_top50", "precision_top25", 
                                 "precision_top10", "jaccard_index",
                                 "correlation", "correlation_abs", "correlation_true", 
-                                "bias", "bias_true", "centrality_Pearson_cor", 
+                                "bias_abs", "bias", "bias_true", "centrality_Pearson_cor", 
                                 "centrality_Kendall_cor", "centrality_top5", 
                                 "centrality_top3", "centrality_top1")))) {
     stop("metric invalid; needs to be 'sensitivity', 'signed_sensitivity', 'sensitivity_top50', 
     'sensitivity_top25', 'sensitivity_top10', 'specificity', 'precision', 'precision_top50', 
     'precision_top25', 'precision_top10', 'jaccard_index', 
-         'correlation', 'correlation_abs', 'correlation_true', 'bias', 'bias_true', 
+         'correlation', 'correlation_abs', 'correlation_true', 'bias_abs', 'bias', 'bias_true', 
          'centrality_Pearson_cor', 'centrality_Kendall_cor', 'centrality_top5', 
          'centrality_top3', 'centrality_top1'")
   }
@@ -147,9 +147,14 @@ evalNet <- function(true, est, metric = NULL, directed = FALSE){
     }
   }
   
+  # average absolute bias between edge weights:
+  if("bias_abs" %in% metric){
+    out$bias <- mean(abs(est-true), na.rm = TRUE)
+  }
+  
   # average bias between edge weights:
   if("bias" %in% metric){
-    out$bias <- mean(abs(est-true), na.rm = TRUE)
+    out$bias <- mean(est-true, na.rm = TRUE)
   }
   
   # average bias between true edge weights:
